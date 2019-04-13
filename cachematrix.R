@@ -10,14 +10,14 @@
 
 makeCacheMatrix <- function(x = matrix()) {
   inverseM <- NULL
-  set <- function(mat){
+  setMatrix <- function(mat){
     x<<- mat
     inverseM <<- NULL
   }
-  get <- function() x
+  getMatrix <- function() x
   setInverse <- function(inv) inverseM <<- inv
   getInverse <- function() inverseM
-  list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
+  list(setMatrix = setMatrix, getMatrix = getMatrix, setInverse = setInverse, getInverse = getInverse)
 }
 
 
@@ -31,8 +31,8 @@ cacheSolve <- function(x, ...) {
     print("getting from cache!!")
     return(inverseM)
   } 
-  mat <- x$get()
-  inverseM <- solve(mat)
+  mat <- x$getMatrix()
+  inverseM <- solve(mat, ...)
   x$setInverse(inverseM)
   inverseM
 }
